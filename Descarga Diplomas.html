@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario de búsqueda</title>
+  <style>
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Formulario de búsqueda de certificados</h1>
+  <form>
+    <label for="identification-number">Número de Identificación:</label>
+    <input type="text" id="identification-number" required>
+    <button type="button" onclick="buscarCertificado()">Buscar</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    function buscarCertificado() {
+      var identificationNumber = document.getElementById("identification-number").value;
+      var certificates = {
+        "1110534259": "https://drive.google.com/file/d/1UpntHAAS_afqQJdyKCi0k6CokTuvcp6t/view?usp=drive_link",
+        "1017127572": "https://drive.google.com/file/d/1UpntHAAS_afqQJdyKCi0k6CokTuvcp6t/view?usp=drive_link",
+        // Agrega más asociaciones aquí según sea necesario
+      };
+
+      var resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = ""; // Limpiar resultados anteriores
+
+      if (certificates.hasOwnProperty(identificationNumber)) {
+        var certificateLink = certificates[identificationNumber];
+        var downloadLink = document.createElement("a");
+        downloadLink.href = certificateLink;
+        downloadLink.textContent = "Descargar Certificado";
+        resultDiv.appendChild(downloadLink);
+      } else {
+        resultDiv.textContent = "No se encontró ningún certificado para el número de identificación ingresado.";
+      }
+    }
+  </script>
+</body>
+</html>
